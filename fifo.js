@@ -1,69 +1,72 @@
 //? Fifo en js
-
-let Queue = {
+//! 1-Intente hacer una mezcla entre el de Jose y el de usted Profe, pero no me deja correr la funciones como funciones flecha ()=>{} me da un error de propiedad
+//! 2 - El codigo de Jose, que utilize como base le quite algunas cosas que considere no necesarias para la tarea, aunque esteticamente se veria "bonito" no creo 
+//! que sea practico, aparte intente hacer unos trow errorException pero me daba fallas igual, así que lo deje así, creo que mas nada que decir.
+let Queue = { 
     items: [],
-    limit: password,
+    limit: 10,
 
-    Add: function (e) {
-        return this.items.length < this.limit
-            ? (this.items.push(e), "agregado")
-            : "cannot add element because it exceeds the allowed limit";
+    add: function (e) {
+        if (this.items.length < this.limit) {
+            this.items.push(e);
+        } else return false;
     },
-    Offer: function (index, element) {
-        return this.items.length < this.limit
-            ? ((this.items[index] = element), "agg")
-            : "cannot add element because it exceeds the allowed limit";
+    offer1: function (index) {
+        this.items.push(index);
+        return true;
     },
-    Elements: function (limit) {
-        return this.items.length < limit
-            ? "request exceeds array size"
-            : this.items.slice(0, limit);
+    offer2: function (index) {
+        if (this.items.length >= this.limit) {
+            this.items.pop();
+            this.items.push(index);
+            return true;
+        } else return false;
     },
-    Resum: function () {
-        return this.items.length == 0
-            ? "there are no data"
-            : `first item is: ${
-                  this.items[0]
-              },\n last element is: ${this.items.pop()},\n total array size is: ${
-                  this.items.length
-              }`;
+    element: function () {
+        return this.items[0];
     },
-    Peek: function () {
-        return this.items.length == 0 ? "there are no data" : this.items[0];
+    peek: function () {
+        if (this.items.length === 0) {
+            return null;
+        } else return this.items[0];
     },
-    Poll: function () {
-        return this.items.length == 0
-            ? "there are no data"
-            : this.items.shift();
+    poll: function () {
+        if (this.items.length === 0) {
+            return null;
+        }
+        let rtn = this.items[0];
+        this.items.shift();
+        return rtn;
     },
-    Remove: function () {
-        return this.items.shift();
+    remove: function () {
+        let rtn = this.items[0];
+        this.items.shift();
+        return rtn;
     },
-    Size: function () {
+    size: function () {
         return this.items.length;
     },
-    Is_empty: function () {
-        return this.items.length == 0;
+    is_empty: function () {
+        return this.items.length === 0;
     },
 };
 
 let Q = Queue;
-console.log(Q);
-console.log(Q.Peek());
-console.log(Q.Add(1));
-console.log(Q.Add(2));
-console.log(Q.Add(4));
-console.log(Q.Add(5));
-console.log(Q.Offer(2, 3));
-console.log(Q.Elements());
-console.log(Q.Is_empty());
-console.log(Q.Size());
-console.log(Q.Peek());
-console.log(Q.Elements());
-console.log(Q.Poll());
-console.log(Q.Elements());
-console.log(Q.Remove());
-console.log(Q.Elements());
-console.log(Q.Resum());
-console.log(Q.Size());
-console.log(Q.Is_empty());
+Q.add(1);
+Q.add(2);
+Q.add(3);
+Q.add(4);
+Q.add(5);
+console.log(Q.peek());
+console.log(Q.offer1(2));
+console.log(Q.offer2(3));
+console.log(Q.element());
+console.log(Q.is_empty());
+console.log(Q.size());
+console.log(Q.peek());
+console.log(Q.element());
+console.log(Q.poll());
+console.log(Q.element());
+console.log(Q.remove());
+console.log(Q.size());
+console.log(Q.is_empty());
